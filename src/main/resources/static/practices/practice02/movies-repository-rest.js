@@ -51,6 +51,7 @@ var removeMovie = (id) => {
     xhr.onload = () => {console.log(xhr.status); getMovies();}
     xhr.send();
 }
+
 var movieFromForm = () =>{
     var id = $$value("movie.field.id");
     var title = $$value("movie.field.title");
@@ -64,6 +65,7 @@ var movieFromForm = () =>{
     result = $$("movie.field.result.winner").value == result;
     return {id: id, title: title, releasedDate: releasedDate, budget: budget, poster: poster, rating: rating, category: category, result: result};
 };
+
 var clearForm = () =>{
     $$("movie.field.id").value=null;
     $$("movie.field.title").value=null;
@@ -107,6 +109,7 @@ var fieldValueIsRequired = (field, help, label, value) => {
     }
     return result;
 };
+
 var movieIsValid = (movie) => {
     var result = true;
     result &= fieldValueIsRequired("movie.field.title","movie.help.title","title", movie.title);

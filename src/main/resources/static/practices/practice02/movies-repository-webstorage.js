@@ -9,53 +9,7 @@ var $$checkedValue = (ids) => {
     var checkeds = ids.filter((_id) => $$(_id).checked);
     return checkeds.length == 1?$$(checkeds[0]).value:"";
 };
-var getMoviesSK = () => {
-    var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8080/week2/api/movies?forceError=false";
-    xhr.open("GET", url, true);
-    xhr.onload = () => {console.log(JSON.parse(xhr.responseText));}
-    xhr.send();
-}
-var addMovieSK = () => {
-    var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8080/week2/api/movies";
-    var data = {title: "Avengers: Infinity War", releasedDate:"2018-04-17", poster: "https://image.tmdb.org/t/p/w1280/rkHe0BfOo1f5N2q6rxgdYac7Zf6.jpg", rating: 83, budget: 300000000, result: false};
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type","application/json");
-    xhr.onload = () => {console.log(JSON.parse(xhr.responseText));}
-    xhr.send(JSON.stringify(data));
-}
-var removeMovieSK = (id) => {
-    if (!id) return;
-    var xhr = new XMLHttpRequest();
-    var url = "api/movies/"+id;
-    xhr.open("DELETE", url, true);
-    xhr.onload = () => {console.log(xhr.status);}
-    xhr.send();
-}
-var getMovies = () => {
-    var xhr = new XMLHttpRequest();
-    var url = "api/movies?forceError=false";
-    xhr.open("GET", url, true);
-    xhr.onload = () => {var loaded = JSON.parse(xhr.responseText); repository = loaded; showMovies();}
-    xhr.send();
-}
-var addMovie = (movie) => {
-    var xhr = new XMLHttpRequest();
-    var url = "api/movies";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type","application/json");
-    xhr.onload = () => {console.log(xhr.responseText); getMovies();}
-    xhr.send(JSON.stringify(movie));
-}
-var removeMovie = (id) => {
-    if (!id) return;
-    var xhr = new XMLHttpRequest();
-    var url = "api/movies/"+id;
-    xhr.open("DELETE", url, true);
-    xhr.onload = () => {console.log(xhr.status); getMovies();}
-    xhr.send();
-}
+
 var movieFromForm = () =>{
     var id = $$value("movie.field.id");
     var title = $$value("movie.field.title");
@@ -69,6 +23,7 @@ var movieFromForm = () =>{
     result = $$("movie.field.result.winner").value == result;
     return {id: id, title: title, releasedDate: releasedDate, budget: budget, poster: poster, rating: rating, category: category, result: result};
 };
+
 var clearForm = () =>{
     $$("movie.field.id").value=null;
     $$("movie.field.title").value=null;
@@ -80,18 +35,7 @@ var clearForm = () =>{
     $$("movie.field.result.nominee").checked=null;
     $$("movie.field.result.winner").checked=null;
 };
-var movieToForm = (movie) =>{
-    $$("movie.field.id").value=movie.id;
-    $$("movie.field.title").value=movie.title;
-    $$("movie.field.releasedDate").value=movie.releasedDate;
-    $$("movie.field.budget").value=movie.budget;
-    $$("movie.field.poster").value=movie.poster;
-    $$("movie.field.rating").value=movie.rating;
-    $$("movie.field.category").value=movie.category;
-    document.getElementById("movie.field.category").value=movie.category;
-    $$("movie.field.result.nominee").checked= !movie.result;
-    $$("movie.field.result.winner").checked= movie.result;
-};
+
 var addRowToTable = (movie) => {
     var row = "";
     row += "<tr>";
@@ -135,25 +79,25 @@ var saveMovieLs = (movie) => {
     repository.push(movie);
     localStorage.setItem("movies",JSON.stringify(repository));
 };
-var saveMovie = (movie) => {
-    addMovie(movie);
-}
+
+
 var onclickBtnSave = (e) => {
     var movie = movieFromForm();
     if (movieIsValid(movie)){
-        saveMovie(movie);
+        saveMovieLs(movie);
         clearForm();
         loadAndShowMovies();
     }
 };
 var onclickBtnClear = (e) => clearForm();
+
 var deleteMovieLs = (id) => {
     var index = repository.findIndex(_m => _m.id == id);
     repository.splice(index,1);
     localStorage.setItem("movies",JSON.stringify(repository));
 };
 var deleteMovie = (id) => {
-    removeMovie(id);
+    deleteMovieLs(id);
 };
 var onclickBtnDelete = (e) => {
     deleteMovie(e.target.dataset.movieId);
@@ -178,11 +122,11 @@ var showMovies = () => {
 var loadMoviesLs = () => {
     repository = JSON.parse(localStorage.getItem("movies")) || [];
 };
-var loadMovies = () => {
-    getMovies();
-};
+// var loadMovies = () => {
+//     getMovies();
+// };
 var loadAndShowMovies = () => {
-    loadMovies();
+    loadMoviesLs();
     showMovies();
 };
 init = () => {
@@ -201,4 +145,10 @@ init = () => {
     };
     loadAndShowMovies();
 };
+
+//
+Array.prototype.add = function(elem) {
+    [].push(elem);
+};
+
 window.onload = init;
