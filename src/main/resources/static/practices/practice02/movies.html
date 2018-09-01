@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>practice</title>
+	<!-- Not Used -->
+	<!--<script src="movies-repository-webstorage.js"></script> -->
+	<script src="movies-repository-rest.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h1 class="pagetitle">practice</h1>
+		<div id="messageArea"></div>
+
+		<form id="frm">
+			<input id="movie.field.id" type="hidden">
+			<fieldset class="form-group">
+				<label for="movie.field.title">Title: </label> <input
+					id="movie.field.title" type="text" class="form-control" /> <span
+					id="movie.help.title"></span>
+			</fieldset>
+			<fieldset class="form-group">
+				<label>Released Date: </label> <input id="movie.field.releasedDate"
+					type="date" class="form-control" /> <span
+					id="movie.help.releasedDate"></span>
+			</fieldset>
+			<fieldset class="form-group">
+				<label>Budget: </label> <input id="movie.field.budget" type="text"
+					class="form-control" /> <span id="movie.help.budget"></span>
+			</fieldset>
+			<fieldset class="form-group">
+				<label>Poster: </label> <input id="movie.field.poster" type="text"
+					class="form-control" /> <span id="movie.help.poster"></span>
+			</fieldset>
+			<fieldset class="form-group">
+				<label>Rating: </label> <input id="movie.field.rating" type="number"
+					class="form-control" /> <span id="movie.help.rating"></span>
+			</fieldset>
+			<fieldset class="form-group">
+				<label>Category: </label> <select id="movie.field.category"
+					class="form-control">
+					<option value="Best Picture">Best Picture</option>
+					<option value="Cinematography">Cinematography</option>
+					<option value="Costume Design">Costume Design</option>
+					<option value="Directing">Directing</option>
+					<option value="Film Editing">Film Editing</option>
+					<option value="Markup and Hairstyling">Markup and
+						Hairstyling</option>
+					<option value="Music Original Score">Music (Original
+						Score)</option>
+					<option value="Music Original Song">Music (Original Song)</option>
+					<option value="Production Design">Production Design</option>
+					<option value="Sound Editing">Sound Editing</option>
+					<option value="Sound Mixing">Sound Mixing</option>
+					<option value="Visual Effects">Visual Effects</option>
+					<option value="Writing Adapted Screenplay">Writing
+						(Adapted Screenplay)</option>
+					<option value="Writing Original Screenplay">Writing
+						(Original Screenplay)</option>
+				</select> <span id="movie.help.category"></span>
+			</fieldset>
+			<fieldset>
+				<label>Result: </label> <label class="form-control"><input
+					id="movie.field.result.winner" name="movie.field.result"
+					type="radio" value="winner" />Winner</label> <label class="form-control"><input
+					id="movie.field.result.nominee" name="movie.field.result"
+					type="radio" value="nominee" />Nominee</label> <span
+					id="movie.help.result"></span>
+			</fieldset>
+			<fieldset>
+				<input id="btnSave" class="btn btn-primary" type="button"
+					value="Save" /> <input id="btnClear" class="btn btn-secondary"
+					type="button" value="Clear" />
+			</fieldset>
+		</form>
+		<table class="table">
+			<caption id="tblcaption">0 itens</caption>
+			<thead>
+				<tr>
+					<th>title</th>
+					<th>released date</th>
+					<th>budget</th>
+					<th>poster</th>
+					<th>rating</th>
+					<th>category</th>
+					<th>winner</th>
+				</tr>
+			</thead>
+			<tbody id="tblBody">
+				<tr>
+					<td>The Shape of Water</td>
+					<td>2017-12-22</td>
+					<td>19.400.000</td>
+					<td><img
+						src="https://drraa3ej68s2c.cloudfront.net/wp-content/uploads/2017/12/12163133/87954c22e6e3783117f13feadf7e9681f463b7011a91c7af2ebd1a962d20aa53-195x195.jpg"
+						width="30px"></td>
+					<td>74</td>
+					<td>Best Picture</td>
+					<td>yes</td>
+				</tr>
+			<tbody>
+		</table>
+	</div>
+
+	<h2>
+		Orientation <input id="chbOrientation" type="checkbox"
+			checked="checked" />
+	</h2>
+	<section id="secOrientation">
+		<details>
+			<summary>
+				<span class="phase">Sketching</span> - adicionar, listar e remover
+				filmes
+			</summary>
+			<pre>
+* Aceite 1 confirmar a criação de um filme usando a seguinte chamada REST: <code>curl -v -X POST localhost:8080/api/movies -d '{"title":"Movie title"}' -H 'Content-Type: application/json'</code>
+* Aceite 2 confirmar a consulta dos filmes usando a seguinte chamada REST: <code>curl -v localhost:8080/api/movies</code>
+* Aceite 3 confirmar a remoção de um filme usando a seguinte chamada REST: <code>curl -v --request DELETE localhost:8080/api/movies/:id</code>
+* Aceite 4 criar um filme usando XHR e o respectivo endpoint REST mostrando resposta no console
+* Aceite 5 consultar os filmes usando XHR e o respectivo endpoint REST mostrando resposta no console
+* Aceite 6 remover um filme usando XHR e o respectivo endpoint REST mostrando resposta no console
+</pre>
+		</details>
+		<details>
+			<summary>
+				<span class="phase">Inking</span> - adicionar, listar e remover
+				filmes
+			</summary>
+			<pre>
+* Aceite 1 substituir a persistência com localStorage pela persistência com endpoints REST
+* Aceite 2 apresentar mensagem se o campo title estiver vazio ao salvar
+* Aceite 3 apresentar mensagem se o campo releasedDate estiver vazio ao salvar
+			</pre>
+		</details>
+		<details>
+			<summary>
+				<span class="phase">Painting</span> - adicionar, listar e remover
+				filmes
+			</summary>
+			<pre>
+* Aceite 1 mover código javascript do arquivo movies.html para o arquivo movies-repository-rest.js
+* Aceite 2 utilizar constante para cada variável que não tem seu respectivo valor alterado
+* Aceite 3 utilizar constante para cada identificador
+* Aceite 4 adicionar função add pra classe Array
+* Aceite 5 adicionar função remove pra classe Array
+* Aceite 6 separar funções usadas para persistência com localStorage no arquivo movies-repository-webstorage.js
+* Aceite 7 separar funções usadas para persistência com endpoints REST no arquivo movies-repository-rest.js
+* Aceite 8 explorar outros recursos do ES6: template literals, strict mode, DateTimeFormat, NumberFormat
+			</pre>
+		</details>
+	</section>
+
+
+
+</body>
+</html>
