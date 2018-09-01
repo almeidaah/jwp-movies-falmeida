@@ -148,7 +148,10 @@ init = () => {
 
 //
 Array.prototype.add = function(elem) {
-    [].push(elem);
+    this.push(elem);
 };
+
+var test = [];
+test.add(1).add(2);
 
 window.onload = init;
